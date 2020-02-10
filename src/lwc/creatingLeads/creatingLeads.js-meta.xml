@@ -3,5 +3,8 @@
     <apiVersion>47.0</apiVersion>
     <description>Creating Leads</description>
     <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__HomePage</target>
+    </targets>
     <masterLabel>Creating Leads</masterLabel>
 </LightningComponentBundle>
