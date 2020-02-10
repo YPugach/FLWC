@@ -1,0 +1,12 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+.idea*
+*.iml
+*.patch
+*.properties
+*.properties_my
+outputCPD.xml
+pmd.xml
+IlluminatedCloud/*
+credentials
