@@ -17,17 +17,16 @@ export default class CreatingLeads extends LightningElement {
      email = '';
      company = '';
 
-
      handleFirstNameChange(event) {
-        this.accountId = undefined;
+        this.leadId = undefined;
         this.firstName = event.target.value;
      }
      handleLastNameChange(event) {
-         this.accountId = undefined;
+         this.leadId = undefined;
          this.lastName = event.target.value;
      }
      handleEmailChange(event) {
-         this.accountId = undefined;
+         this.leadId = undefined;
          this.email = event.target.value;
      }
      createLead() {
@@ -38,7 +37,7 @@ export default class CreatingLeads extends LightningElement {
         fields[COMPANY_FIELD.fieldApiName] = this.lastName;
         const recordInput = { apiName: LEAD_OBJECT.objectApiName, fields };
         createRecord(recordInput)
-            .then(account => {
+            .then( lead => {
                 this.leadId = lead.id;
                 this.dispatchEvent(
                     new ShowToastEvent({
@@ -52,7 +51,7 @@ export default class CreatingLeads extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Error creating record',
-                        message: error.body.message,
+                        message: reduceErrors(error).join(', '),
                         variant: 'error',
                     }),
                 );
