@@ -1,12 +1,15 @@
-<!--
- - Created by e.pugach on 10.02.20.
- -->
-
-<!-- Creating Leads -->
 <template>
-    <lightning-card title="New Leads" icon-name="custom:custom14">
+    <lightning-card title="New Leads" icon-name="standard:record">
         <div class="slds-m-around_medium">
             New {greeting}
+            <lightning-input label="Id" disabled data-id="leadId" value={leadId}></lightning-input>
+            <lightning-input name="input1"  placeholder="Lead First Name" onchange={handleFirstNameChange}></lightning-input>
+            <lightning-input name="input2"  placeholder="Lead Last Name" onchange={handleLastNameChange}></lightning-input>
+            <lightning-input name="input3"  placeholder="Email" onchange={handleEmailChange}></lightning-input>
+        </div>
+        <div>
+            <lightning-button label="Add Lead" onclick={AddItem} class="slds-button slds-button_brand"></lightning-button>
+            <lightning-button label="Create Leads" onclick={createLead} class="slds-button slds-button_success"></lightning-button>
         </div>
     </lightning-card>
 </template>
