@@ -19,6 +19,7 @@ export default class CreatingLeads extends LightningElement {
 
 
      handleFirstNameChange(event) {
+        this.accountId = undefined;
         this.firstName = event.target.value;
      }
      handleLastNameChange(event) {
@@ -26,6 +27,7 @@ export default class CreatingLeads extends LightningElement {
          this.lastName = event.target.value;
      }
      handleEmailChange(event) {
+         this.accountId = undefined;
          this.email = event.target.value;
      }
      createLead() {
