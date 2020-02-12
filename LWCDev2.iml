@@ -41,6 +41,10 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
+                            <option name="name" value="createLeadLWC" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
                             <option name="name" value="CustomWrapper" />
                             <option name="selected" value="true" />
                           </MetadataEntry>

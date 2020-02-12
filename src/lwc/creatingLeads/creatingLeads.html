@@ -1,15 +1,38 @@
 <template>
     <lightning-card title="New Leads" icon-name="standard:record">
         <div class="slds-m-around_medium">
-            New {greeting}
-            <lightning-input label="Id" disabled data-id="leadId" value={leadId}></lightning-input>
-            <lightning-input name="input1"  placeholder="Lead First Name" onchange={handleFirstNameChange}></lightning-input>
-            <lightning-input name="input2"  placeholder="Lead Last Name" onchange={handleLastNameChange}></lightning-input>
-            <lightning-input name="input3"  placeholder="Email" onchange={handleEmailChange}></lightning-input>
+          <!--  <c-list-inputs AddLead={Addlead}></c-list-inputs>-->
+            <div>
+                <!--<template>-->
+                <template for:each={leadList} for:item="lead">
+                    <div class="slds-grid slds-gutters" key={lead.Id}>
+                        <div class="slds-col">
+                            <lightning-input disabled data-id="leadId" value={lead.Id}></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input value={lead.firstName} name="input1" placeholder="Lead First Name"
+                                             onchange={handleFirstNameChange}></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input value={lead.lastName} name="input2" placeholder="Lead Last Name"
+                                             onchange={handleLastNameChange}></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input value={lead.email} name="input3" placeholder="Email"
+                                             onchange={handleEmailChange}></lightning-input>
+                        </div>
+                    </div>
+                </template>
+                <!--</template>-->
+            </div>
         </div>
-        <div>
-            <lightning-button label="Add Lead" onclick={AddItem} class="slds-button slds-button_brand"></lightning-button>
-            <lightning-button label="Create Leads" onclick={createLead} class="slds-button slds-button_success"></lightning-button>
+        <div class="slds-clearfix">
+            <div class="slds-float_left slds-p-left_medium">
+                <lightning-button label="Add Lead" onclick={addItem} variant="brand"></lightning-button>
+            </div>
+            <div class="slds-float_right slds-p-right_medium">
+                <lightning-button label="Create Leads" onclick={createLead} variant="success"></lightning-button>
+            </div>
         </div>
     </lightning-card>
 </template>
