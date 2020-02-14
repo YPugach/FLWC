@@ -1,13 +1,23 @@
 public with sharing class createLeadLWC {
     @AuraEnabled
-    public static void insertLead(List<Lead> leadList) {
-////        for (List<Opportunity> oppts:
-////        [SELECT Id, Name, Amount, StageName, CloseDate FROM Opportunity WHERE Amount > :amount]) {
-////            for(Opportunity o : oppts) {
-////                o.StageName = stage;
-////            }
-////            update oppts;
-////        }
-////        return;
+    public static void insertLead(String jsonString) {
+        List<Lead> leads = new List<Lead>();
+        JSONParser parser = JSON.createParser(jsonString);
+        while (parser.nextToken() != null) {
+            if (parser.getCurrentToken() == JSONToken.START_ARRAY) {
+                while (parser.nextToken() != null) {
+                    if (parser.getCurrentToken() == JSONToken.START_OBJECT) {
+                        Lead le = (Lead)parser.readValueAs(Lead.class);
+                        Lead leadobj = new Lead();
+                        leadobj.FirstName=le.FirstName;
+                        leadobj.LastName=le.LastName;
+                        leadobj.Company=le.Company;
+                        leadobj.Email=le.Email;
+                        leads.add(leadobj);
+                    }
+                }
+            }
+        }
+        insert leads;
     }
 }

@@ -8,97 +8,88 @@ import FIRSTNAME_FIELD from '@salesforce/schema/Lead.FirstName';
 import LASTNAME_FIELD from '@salesforce/schema/Lead.LastName';
 import EMAIL_FIELD from '@salesforce/schema/Lead.Email';
 import COMPANY_FIELD from '@salesforce/schema/Lead.Company';
-import insertLeads from '@salesforce/apex/createLeadLWC.insertLead';
+import insertLead from '@salesforce/apex/createLeadLWC.insertLead';
 
 
 export default class CreatingLeads extends LightningElement {
-
-//     @track leadId;
+     lastId = 0;
+     @track leadId;
      @track leadList = [{
-         Id: '',
+         Id: this.lastId,
          firstName: '',
          lastName : '',
-         email: ''
+         email: '',
+         company:'test'
      }];
-     count=0;
-
-     handleFirstNameChange(event) {
-        this.leadId = undefined;
-        this.firstName = event.target.value;
-     }
-     handleLastNameChange(event) {
-         this.leadId = undefined;
-         this.lastName = event.target.value;
-     }
-     handleEmailChange(event) {
-         this.leadId = undefined;
-         this.email = event.target.value;
-     }
-
      addItem(){
-         console.log('Hello');
-
+         this.lastId = this.lastId + 1 ;
          this.leadList.push ({
-             Id: '',
+             Id: this.lastId,
              firstName: '',
              lastName : '',
-             email: ''
+             email: '',
+             company: 'test'
          });
+         console.log(this.leadList);
+         console.log(this.leadList.length);
+         console.log('and');
+     }
 
+     handleChange(event) {
+         var foundElement = this.leadList.find( item => item.Id == event.target.dataset.id);
+         foundElement[event.target.name] = event.target.value;
+         this.leadList = [...this.leadList];
+         console.log(this.leadList);
+         console.table(JSON.stringify(this.leadList));
          console.log(this.leadList);
      }
 
-
      createLead(event) {
-         insertLeads({
-                 amount: this.amount,
-                 stage: 'Closed Won'
-             })
-             .then(() => {
-                 return refreshApex(this.opptiesOverAmount);
-             })
-             .catch((error) => {
-                 this.message = 'Error received: code' + error.errorCode + ', ' +
-                     'message ' + error.body.message;
-             });
+         console.log(this.leadList);
+         var arrNewLead=[];
+         var arrOldLead = this.leadList.slice();
+
+         for(var i=0; i<arrOldLead.length; i=i+1){
+             var obj = Object.assign({},arrOldLead[i]);
+             delete obj.Id;
+             arrNewLead.push(obj);
+         };
+
+         for(var i=0; i<arrNewLead.length; i=i+1){
+             var obj = Object.assign({},arrNewLead[i]);
+             for (var key in obj){
+                 if (obj[key] == ''){
+                    this.dispatchEvent(
+                       new ShowToastEvent({
+                           title: 'Error creating record',
+                           message: 'Please fill in the blank fields',
+                           variant: 'error'
+                       })
+                    );
+                 return;
+                 }
+                 if (key == 'email'&&  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(obj[key]) != true){
+                    this.dispatchEvent(
+                       new ShowToastEvent({
+                           title: 'Error creating record',
+                           message: 'Please enter a valid email',
+                           variant: 'error'
+                       })
+                    );
+                 return;
+                 }
+             }
          }
-
-
-
-
-
-
-
-
-
-
-//     createLead() {
-//        const fields = {};
-//        fields[FIRSTNAME_FIELD.fieldApiName] = this.firstName;
-//        fields[LASTNAME_FIELD.fieldApiName] = this.lastName;
-//        fields[EMAIL_FIELD.fieldApiName] = this.email;
-//        fields[COMPANY_FIELD.fieldApiName] = this.lastName;
-//        const recordInput = { apiName: LEAD_OBJECT.objectApiName, fields };
-//        createRecord(recordInput)
-//            .then( lead => {
-//                this.leadId = lead.id;
-//                this.dispatchEvent(
-//                    new ShowToastEvent({
-//                        title: 'Success',
-//                        message: 'Lead created',
-//                        variant: 'success',
-//                    }),
-//                );
-//            })
-//            .catch(error => {
-//                this.dispatchEvent(
-//                    new ShowToastEvent({
-//                        title: 'Error creating record',
-//                        message: reduceErrors(error).join(', '),
-//                        variant: 'error',
-//                    }),
-//                );
-//            });
-//    }
-
+         console.log(arrNewLead);
+         var jsonData = JSON.stringify(arrNewLead);
+         console.log(jsonData);
+         insertLead({jsonString: jsonData});
+         this.dispatchEvent(
+             new ShowToastEvent({
+                 title: 'Success',
+                 message: 'Leads created',
+                 variant: 'success'
+             })
+         );
+     }
 }
