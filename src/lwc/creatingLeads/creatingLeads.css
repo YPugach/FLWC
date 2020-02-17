@@ -1,3 +1,7 @@
 /**
  * Created by e.pugach on 10.02.20.
  */
+.slds-required {
+    display:none !important;
+    visibility: hidden !important;
+}

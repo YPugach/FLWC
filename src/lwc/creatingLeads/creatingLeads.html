@@ -7,18 +7,18 @@
                 <template for:each={leadList} for:item="lead">
                     <div class="slds-grid slds-gutters" key={lead.Id}>
                         <div class="slds-col">
-                            <lightning-input disabled data-id={lead.Id} value={lead.Id} name="id"></lightning-input>
+                            <lightning-input label='Id' disabled data-id={lead.Id} value={lead.Id} name="id"></lightning-input>
                         </div>
                         <div class="slds-col">
-                            <lightning-input name="firstName" placeholder="Lead First Name" data-id={lead.Id}
+                            <lightning-input label='First Name' required name="firstName" placeholder="Lead First Name" data-id={lead.Id}
                                              onchange={handleChange}></lightning-input>
                         </div>
                         <div class="slds-col">
-                            <lightning-input name="lastName" placeholder="Lead Last Name" data-id={lead.Id}
+                            <lightning-input label='Last Name' required name="lastName" placeholder="Lead Last Name" data-id={lead.Id}
                                              onchange={handleChange}></lightning-input>
                         </div>
                         <div class="slds-col">
-                            <lightning-input name="email" placeholder="Email" data-id={lead.Id}
+                            <lightning-input label='Email' required type="email" name="email" placeholder="Email" data-id={lead.Id}
                                              onchange={handleChange}></lightning-input>
                         </div>
                     </div>
