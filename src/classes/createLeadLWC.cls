@@ -1,5 +1,4 @@
 public with sharing class createLeadLWC {
-    public List<Lead> leads { get; set;}
 
 //    public class leadd {
 //        String FirstN;
@@ -7,8 +6,19 @@ public with sharing class createLeadLWC {
 //        String Em;
 //        String Comp;
 //    }
-    @AuraEnabled
-    public static void insertLead(String jsonString) {
+
+//        First (simple) variant to parsing in one row
+//    @AuraEnabled
+//    public static void insertLead(String jsonString) {
+//        List<Lead> leads =(List<Lead>) System.JSON.deserialize(jsonString, List<Lead>.class);
+//        insert leads;
+//    }
+
+
+//        Second variant to parsing with using Parser to parsing any JSONData
+//    @AuraEnabled
+//    public static void insertLead(String jsonString) {
+//
 //        List<Lead> leads = new List<Lead>();
 //        JSONParser parser = JSON.createParser(jsonString);
 //        while (parser.nextToken() != null) {
@@ -26,16 +36,28 @@ public with sharing class createLeadLWC {
 //                }
 //            }
 //        }
-        List<Lead> leads =(List<Lead>) System.JSON.deserialize(jsonString, List<Lead>.class);
-//        for(Map<String,String> ld :lds){
-//            Lead l = new Lead();
-//            l.FirstName = ld.get('firstname');
-//            l.LastName = ld.get('lastname');
-//            l.Company = ld.get('company');
-//            l.Email = ld.get('email');
-//            leads.add(l);
-//        }
-        insert leads;
+//        insert leads;
+//    }
 
-    }
+//        Third variant to parsing without type of data.
+      @AuraEnabled
+      public static void insertLead(String jsonString) {
+
+        List<Lead> leads = new List<Lead>();
+        List<Object> leadObjects = (List<Object>) JSON.deserializeUntyped(jsonString);
+         for (Object l :leadObjects) {
+             Map<String, Object> leadAttributes = (Map<String, Object>)l;
+             Lead le = new Lead();
+             String firstN =(String) leadAttributes.get('firstName');
+             le.FirstName = firstN;
+             String lastN =(String) leadAttributes.get('lastName');
+             le.LastName = lastN;
+             String comp =(String) leadAttributes.get('company');
+             le.Company = comp;
+             String ema = (String) leadAttributes.get('email');
+             le.Email = ema ;
+             leads.add(le);
+         }
+          insert leads;
+      }
 }
