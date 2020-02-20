@@ -52,19 +52,19 @@ public with sharing class TestDataGenerator {
         return leads;
     }
 
-    public static Campaign createCampaign(){
+    public static Campaign createCampaign(String nam){
         Campaign camp = new Campaign(
-                Name = 'Facebook'
+                Name = nam
         );
         insert camp;
         return camp;
     }
-     public static List<Campaign> createCampaignWithChildCampaigns(Integer month){
-         Campaign camp = createCampaign();
+     public static List<Campaign> createCampaignWithChildCampaigns(Integer month, String nam){
+         Campaign camp = createCampaign(nam);
          List<Campaign> childCampaigns = new List<Campaign>();
          for(Integer i=1; i<=month;i++){
              Campaign child = new Campaign(
-                     Name = 'Facebook_'+i+'_2020',
+                     Name = nam+'_'+i+'_2020',
                      ParentId = camp.Id,
                      StartDate = Date.newInstance(2020,i,1),
                      EndDate = Date.newInstance(2020,i,29)

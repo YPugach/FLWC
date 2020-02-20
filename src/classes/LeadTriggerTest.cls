@@ -5,7 +5,7 @@
 private class LeadTriggerTest {
     @IsTest
     static void beforeInsertOneLead() {
-        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12);
+        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Lead lead = TestDataGenerator.createLead();
     }
 
@@ -20,7 +20,7 @@ private class LeadTriggerTest {
 
     @IsTest
     static void beforeInsertLeads() {
-        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12);
+        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Test.startTest();
         List<Lead> leads = TestDataGenerator.createLeadsWithSource(250);
         Test.stopTest();
@@ -30,7 +30,7 @@ private class LeadTriggerTest {
 
         Test.startTest();
         try{
-            List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12);
+            List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
             List<Lead> leads = TestDataGenerator.createLeadsWithInvalidSource(250);
         }catch (System.DmlException e){
             System.assert(e.getMessage().contains('Please select an existing campaign source'));
@@ -41,7 +41,7 @@ private class LeadTriggerTest {
     @IsTest
     static void beforeUpdateInvalidLead() {
         Test.startTest();
-        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12);
+        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Lead lead = TestDataGenerator.createLead();
         try{
             lead.LeadSource = 'Twitter';
@@ -52,15 +52,17 @@ private class LeadTriggerTest {
         Test.stopTest();
 
     }
-//    @IsTest
-//    static void afterInsertLead() {
-//        Test.startTest();
-//        List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12);
-//        Lead lead = TestDataGenerator.createLead();
-//        Campaign camp = [SELECT Name, Id FROM Campaign WHERE Parent.Name =:lead.LeadSource AND StartDate<:lead.CreatedDate.date() AND EndDate> :lead.CreatedDate.date()];
-//        CampaignMember cm = [SELECT Name, Id, LeadId, CampaignId  FROM CampaignMember WHERE LeadId =:lead.Id];
-//        System.assertEquals(cm.CampaignId,camp.Id );
-//        Test.stopTest();
-//
-//    }
+    @IsTest
+    static void afterUpdateLead() {
+        Test.startTest();
+        List<Campaign> childCampaigns1 = TestDataGenerator.createCampaignWithChildCampaigns(12,'Facebook');
+        List<Campaign> childCampaigns2 = TestDataGenerator.createCampaignWithChildCampaigns(12,'Instagram');
+        Lead lead = TestDataGenerator.createLead();
+        lead.LeadSource = 'Instagram';
+        update lead;
+        CampaignMember cm = [SELECT Name, Id, LeadId, CampaignId  FROM CampaignMember WHERE LeadId =:lead.Id ];
+        System.assertEquals(cm.CampaignId,childCampaigns2[1].Id );
+        Test.stopTest();
+
+    }
 }

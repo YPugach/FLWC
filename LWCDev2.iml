@@ -49,6 +49,10 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
+                            <option name="name" value="LeadTriggerHandler" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
                             <option name="name" value="LeadTriggerTest" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
