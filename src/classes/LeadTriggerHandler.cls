@@ -16,8 +16,8 @@ public with sharing class LeadTriggerHandler {
     }
 
     public static void afterUpdate(List<Lead> newLeads, List<Lead> oldLeads) {
-        createCampaignMembers(newLeads);
         deleteOldCampaignMembers(oldLeads);
+        createCampaignMembers(newLeads);
     }
 
     public static void checkValidLeadSource(List<Lead> leads) {
@@ -58,7 +58,7 @@ public with sharing class LeadTriggerHandler {
             CampaignMember cm = new CampaignMember();
             cm.LeadId = l.Id;
             if (parentChildren.containsKey(l.LeadSource)) {
-                cm.CampaignId = parentChildren.get(l.LeadSource)[l.CreatedDate.month() - 1].camp.Id;
+                cm.CampaignId = parentChildren.get(l.LeadSource)[l.CreatedDateTime__c.month() - 1].camp.Id;
                 campaignMembers.add(cm);
             }
         }

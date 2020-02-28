@@ -7,7 +7,8 @@ public with sharing class TestDataGenerator {
         Lead lead = new Lead(
                 LastName = getRandomString(),
                 Company = getRandomString(),
-                LeadSource = 'Facebook');
+                LeadSource = 'Facebook',
+                CreatedDateTime__c = System.now());
         insert lead;
         return lead;
     }
@@ -15,7 +16,8 @@ public with sharing class TestDataGenerator {
         Lead lead = new Lead(
                 LastName = getRandomString(),
                 Company = getRandomString(),
-                LeadSource = 'Twitter');
+                LeadSource = 'Twitter',
+                CreatedDateTime__c = System.now());
         insert lead;
         return lead;
     }
@@ -27,7 +29,8 @@ public with sharing class TestDataGenerator {
             Lead l = new Lead(
                     LastName = getRandomString(),
                     Company = getRandomString(),
-                    LeadSource = 'Facebook');
+                    LeadSource = 'Facebook',
+                    CreatedDateTime__c = System.now());
             leads.add(l);
         }
         insert leads;
@@ -40,12 +43,14 @@ public with sharing class TestDataGenerator {
             Lead l1 = new Lead(
                     LastName = getRandomString(),
                     Company = getRandomString(),
-                    LeadSource = 'Facebook');
+                    LeadSource = 'Facebook',
+                    CreatedDateTime__c = System.now());
             leads.add(l1);
             Lead l2 = new Lead(
                     LastName = getRandomString(),
                     Company = getRandomString(),
-                    LeadSource = 'Twitter');
+                    LeadSource = 'Twitter',
+                    CreatedDateTime__c = System.now());
             leads.add(l2);
         }
         insert leads;
