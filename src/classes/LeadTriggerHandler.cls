@@ -33,26 +33,32 @@ public with sharing class LeadTriggerHandler {
 
     public static void createCampaignMembers(List<Lead> leads) {
         List<CampaignMember> campaignMembers = new List<CampaignMember>();
+        List<CampaignWrapper> childCamps = new List<CampaignWrapper>();
         Set<String> leadSourceStrings = getSourcesSet(leads);
 
         Map<Id, Campaign> parentCampaigns = new Map<Id, Campaign>([SELECT Name, Id FROM Campaign WHERE Name = :leadSourceStrings]);
 
         List<Campaign> realChildCampaigns = [SELECT Name, Id, Parent.Name, StartDate, EndDate FROM Campaign WHERE ParentId = :parentCampaigns.keySet() ORDER BY StartDate];
 
-        Map<String, List<Campaign>> parentChildren = new Map<String, List<Campaign>>() ;
+        for(Campaign c :realChildCampaigns){
+            childCamps.add(new CampaignWrapper(c));
+        }
+        childCamps.sort();
+
+        Map<String, List<CampaignWrapper>> parentChildren = new Map<String, List<CampaignWrapper>>() ;
 
         for (Campaign c : parentCampaigns.values()) {
-            parentChildren.put(c.Name, new List<Campaign>());
+            parentChildren.put(c.Name, new List<CampaignWrapper>());
         }
-        for (Campaign c : realChildCampaigns) {
-            parentChildren.get(c.Parent.Name).add(c);
+        for (CampaignWrapper c : childCamps) {
+            parentChildren.get(c.camp.Parent.Name).add(c);
         }
 
         for (Lead l : leads) {
             CampaignMember cm = new CampaignMember();
             cm.LeadId = l.Id;
             if (parentChildren.containsKey(l.LeadSource)) {
-                cm.CampaignId = parentChildren.get(l.LeadSource)[l.CreatedDate.month() - 1].Id;
+                cm.CampaignId = parentChildren.get(l.LeadSource)[l.CreatedDate.month() - 1].camp.Id;
                 campaignMembers.add(cm);
             }
         }
@@ -72,14 +78,4 @@ public with sharing class LeadTriggerHandler {
         }
         return leadSourceStrings;
     }
-
-//    public class CampaignWrapper implements Comparable{
-//        public Campaign camp;
-//        public Integer monthNumber;
-//
-//        public CampaignMember (Campaign camp) {
-//            this.camp = camp;
-//            this.monthNumber = camp.CreatedDate.month();
-//        }
-//    }
 }
