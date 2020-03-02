@@ -57,7 +57,7 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
-                            <option name="name" value="LeadTriggerTest" />
+                            <option name="name" value="LeadTriggerHandlerTest" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
@@ -70,6 +70,14 @@
                           </MetadataEntry>
                           <MetadataEntry>
                             <option name="name" value="TestDataGenerator" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="TriggerHandler" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="TriggerHandlerTest" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                         </list>
