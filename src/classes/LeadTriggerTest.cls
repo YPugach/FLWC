@@ -4,13 +4,13 @@
 @IsTest
 private class LeadTriggerTest {
     @IsTest
-    static void beforeInsertOneLead() {
+    static void checkInsertValidLeadSourceTest() {
         List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Lead lead = TestDataGenerator.createLead();
     }
 
 @IsTest
-    static void beforeInsertInvalidLead() {
+    static void checkInsertInvalidLeadSourceTest() {
         try{
             Lead lead = TestDataGenerator.createLeadWithInvalidSource();
         }catch (System.DmlException e){
@@ -19,14 +19,14 @@ private class LeadTriggerTest {
     }
 
     @IsTest
-    static void beforeInsertLeads() {
+    static void checkInsertValidLeadSourcesTest() {
         List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Test.startTest();
         List<Lead> leads = TestDataGenerator.createLeadsWithSource(250);
         Test.stopTest();
     }
     @IsTest
-    static void beforeInsertInvalidLeads() {
+    static void checkInsertInvalidLeadSourcesTest() {
 
         Test.startTest();
         try{
@@ -39,7 +39,7 @@ private class LeadTriggerTest {
     }
 
     @IsTest
-    static void beforeUpdateInvalidLead() {
+    static void updateCampaignMembersTest() {
         Test.startTest();
         List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
         Lead lead = TestDataGenerator.createLead();
@@ -53,7 +53,7 @@ private class LeadTriggerTest {
 
     }
     @IsTest
-    static void afterUpdateLead() {
+    static void createNewCampaignMembersTest() {
         Test.startTest();
         List<Campaign> childCampaigns1 = TestDataGenerator.createCampaignWithChildCampaigns(12,'Facebook');
         List<Campaign> childCampaigns2 = TestDataGenerator.createCampaignWithChildCampaigns(12,'Instagram');
