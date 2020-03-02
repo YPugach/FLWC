@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="New Leads" icon-name="standard:record">
+        <div class="slds-m-around_medium">
+          <!--  <c-list-inputs AddLead={Addlead}></c-list-inputs>-->
+            <div>
+                <!--<template>-->
+                <template for:each={leadList} for:item="lead">
+                    <div class="slds-grid slds-gutters" key={lead.Id}>
+                        <div class="slds-col">
+                            <lightning-input label='Id' disabled data-id={lead.Id} value={lead.Id} name="id"></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input label='First Name' required name="firstName" placeholder="Lead First Name" data-id={lead.Id}
+                                             onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input label='Last Name' required name="lastName" placeholder="Lead Last Name" data-id={lead.Id}
+                                             onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-input label='Email' required type="email" name="email" placeholder="Email" data-id={lead.Id}
+                                             onchange={handleChange}></lightning-input>
+                        </div>
+                    </div>
+                </template>
+                <!--</template>-->
+            </div>
+        </div>
+        <div class="slds-clearfix">
+            <div class="slds-float_left slds-p-left_medium">
+                <lightning-button label="Add Lead" onclick={addItem} variant="brand"></lightning-button>
+            </div>
+            <div class="slds-float_right slds-p-right_medium">
+                <lightning-button label="Create Leads" onclick={createLead} variant="success"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>
