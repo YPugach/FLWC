@@ -61,7 +61,7 @@ private class LeadTriggerTest {
         lead.LeadSource = 'Instagram';
         update lead;
         CampaignMember cm = [SELECT Name, Id, LeadId, CampaignId  FROM CampaignMember WHERE LeadId =:lead.Id ];
-        System.assertEquals(cm.CampaignId,childCampaigns2[1].Id );
+        System.assertEquals(cm.CampaignId,childCampaigns2[2].Id );
         Test.stopTest();
 
     }
