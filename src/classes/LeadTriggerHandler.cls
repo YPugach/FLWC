@@ -1,23 +1,22 @@
 /**
  * Created by e.pugach on 20.02.20.
  */
-
-public with sharing class LeadTriggerHandler {
-    public static void beforeInsert(List<Lead> newLeads) {
-        checkValidLeadSource(newLeads);
+public with sharing class LeadTriggerHandler extends TriggerHandler{
+    protected override void beforeInsert() {
+        checkValidLeadSource(Trigger.new);
     }
 
-    public static void beforeUpdate(List<Lead> newLeads) {
-        checkValidLeadSource(newLeads);
+    protected override void beforeUpdate() {
+        checkValidLeadSource(Trigger.new);
     }
 
-    public static void afterInsert(List<Lead> newLeads) {
-        createCampaignMembers(newLeads);
+    protected override void afterInsert() {
+        createCampaignMembers(Trigger.new);
     }
 
-    public static void afterUpdate(List<Lead> newLeads, List<Lead> oldLeads) {
-        deleteOldCampaignMembers(oldLeads);
-        createCampaignMembers(newLeads);
+    protected override void afterUpdate() {
+        deleteOldCampaignMembers(Trigger.old);
+        createCampaignMembers(Trigger.new);
     }
 
     public static void checkValidLeadSource(List<Lead> leads) {

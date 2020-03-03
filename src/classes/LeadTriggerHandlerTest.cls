@@ -2,7 +2,7 @@
  * Created by e.pugach on 19.02.20.
  */
 @IsTest
-private class LeadTriggerTest {
+private class LeadTriggerHandlerTest {
     @IsTest
     static void checkInsertValidLeadSourceTest() {
         List<Campaign> childCampaigns = TestDataGenerator.createCampaignWithChildCampaigns(12, 'Facebook');
