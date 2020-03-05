@@ -3,6 +3,13 @@
  */
 
 public with sharing class TestDataGenerator {
+    public static Account createAccount(Decimal numb) {
+        Account acc = new Account(
+                Name = getRandomString(),
+                Input_Number__c = numb );
+        insert acc;
+        return acc;
+    }
     public static Lead createLead() {
         Lead lead = new Lead(
                 LastName = getRandomString(),
