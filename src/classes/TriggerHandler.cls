@@ -1,6 +1,3 @@
-/**
- * Created by e.pugach on 2.03.20.
- */
 @SuppressWarnings('PMD.EmptyStatementBlock')  //EmptyStatementBlock for virtual methods
 public virtual class TriggerHandler {
 

@@ -53,6 +53,10 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
+                            <option name="name" value="ContactDataService" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
                             <option name="name" value="createLeadLWC" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
@@ -66,6 +70,14 @@
                           </MetadataEntry>
                           <MetadataEntry>
                             <option name="name" value="LeadTriggerHandlerTest" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="SObjectUtils" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="SObjectUtilsTest" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
