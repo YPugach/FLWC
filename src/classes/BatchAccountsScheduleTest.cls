@@ -6,7 +6,7 @@
 private class BatchAccountsScheduleTest {
     @IsTest
     static void testBehavior() {
-
+        List<Account> account = TestDataGenerator.createManyAccounts(5);
         Test.startTest();
         Datetime nextRunTime = System.now().addMinutes(5);
         String cronString = '' + nextRunTime.second() + ' ' + nextRunTime.minute() + ' ' +
