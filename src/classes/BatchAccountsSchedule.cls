@@ -1,7 +1,7 @@
 global class BatchAccountsSchedule implements Schedulable {
     global void execute(SchedulableContext ctx) {
         Datetime now  = Datetime.now();
-        Datetime nextRunTime = now.addMinutes(2);
+        Datetime nextRunTime = now.addMinutes(5);
         String cronString = '' + nextRunTime.second() + ' ' + nextRunTime.minute() + ' ' +
                 nextRunTime.hour() + ' ' + nextRunTime.day() + ' ' +
                 nextRunTime.month() + ' ? ' + nextRunTime.year();
