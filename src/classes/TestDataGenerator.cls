@@ -10,6 +10,18 @@ public with sharing class TestDataGenerator {
         insert acc;
         return acc;
     }
+
+    public static List<Account> createManyAccounts (Integer numb){
+        List<Account> accounts = new List<Account>();
+        for(Integer i = 0;i<numb;i++){
+            Account acc = new Account(
+                    Name = 'Smitty'+i);
+            accounts.add(acc);
+        }
+        insert accounts;
+        return accounts;
+    }
+
     public static Lead createLead() {
         Lead lead = new Lead(
                 LastName = getRandomString(),
