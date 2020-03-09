@@ -45,6 +45,14 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
+                            <option name="name" value="BatchAccountsScheduleTest" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="BatchAccountsShedule" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
                             <option name="name" value="CampaignWrapper" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
@@ -66,6 +74,10 @@
                           </MetadataEntry>
                           <MetadataEntry>
                             <option name="name" value="createLeadLWC" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="CreateTenThousandAcoounts" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
